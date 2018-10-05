@@ -1,89 +1,100 @@
 package com.stackroute.moviesdb.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
+@Table(name = "Movies")
 public class Movies {
-
     @Id
-    int MovieId;
-    String title;
-    String Cast;
-    String Crew;
-    String similarMovies;
-    int ratings;
+    @Column(name = "imdbId",nullable = false)
+    private String imdbId;
+    @Column(name = "movieTitle",nullable = false)
+    private String movieTitle;
+    @Column(name = "postedUrl",nullable = false)
+    private String postedUrl;
+    @Column(name = "rating",nullable = false)
+    private float rating;
+    @Column(name = "yearOfRelease",nullable = false)
+    private String yearOfRelease;
+    @Column(name = "comments",nullable = false)
+    private String comments;
 
-    public int getMovieId() {
-        return MovieId;
+    public String getImdbId() {
+        return imdbId;
     }
 
-    public void setMovieId(int movieId) {
-        MovieId = movieId;
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getMovieTitle() {
+        return movieTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setMovieTitle(String movieTitle) {
+        this.movieTitle = movieTitle;
     }
 
-    public String getCast() {
-        return Cast;
+    public String getPostedUrl() {
+        return postedUrl;
     }
 
-    public void setCast(String cast) {
-        Cast = cast;
+    public void setPostedUrl(String postedUrl) {
+        this.postedUrl = postedUrl;
     }
 
-    public String getCrew() {
-        return Crew;
+    public float getRating() {
+        return rating;
     }
 
-    public void setCrew(String crew) {
-        Crew = crew;
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
-    public String getSimilarMovies() {
-        return similarMovies;
+    public String getYearOfRelease() {
+        return yearOfRelease;
     }
 
-    public void setSimilarMovies(String similarMovies) {
-        this.similarMovies = similarMovies;
+    public void setYearOfRelease(String yearOfRelease) {
+        this.yearOfRelease = yearOfRelease;
     }
 
-    public int getRatings() {
-        return ratings;
+    public String getComments() {
+        return comments;
     }
 
-    public void setRatings(int ratings) {
-        this.ratings = ratings;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
+
 
     public Movies() {
     }
 
-    public Movies(int movieId, String title, String cast, String crew, String similarMovies, int ratings) {
-        MovieId = movieId;
-        this.title = title;
-        Cast = cast;
-        Crew = crew;
-        this.similarMovies = similarMovies;
-        this.ratings = ratings;
+    public Movies(String imdbId, String movieTitle, String postedUrl, float rating, String yearOfRelease, String comments) {
+        this.imdbId = imdbId;
+        this.movieTitle = movieTitle;
+        this.postedUrl = postedUrl;
+        this.rating = rating;
+        this.yearOfRelease = yearOfRelease;
+        this.comments = comments;
     }
 
     @Override
     public String toString() {
         return "Movies{" +
-                "MovieId=" + MovieId +
-                ", title='" + title + '\'' +
-                ", Cast='" + Cast + '\'' +
-                ", Crew='" + Crew + '\'' +
-                ", similarMovies='" + similarMovies + '\'' +
-                ", ratings=" + ratings +
+                "imdbId='" + imdbId + '\'' +
+                ", movieTitle='" + movieTitle + '\'' +
+                ", postedUrl='" + postedUrl + '\'' +
+                ", rating=" + rating +
+                ", yearOfRelease='" + yearOfRelease + '\'' +
+                ", comments='" + comments + '\'' +
                 '}';
     }
+
+
 }

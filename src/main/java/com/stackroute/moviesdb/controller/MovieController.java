@@ -56,8 +56,8 @@ public class MovieController {
         return responseEntity;
     }
 
-    @GetMapping("movie/getbyid/{id}")
-    public ResponseEntity<?>getMovieById(@PathVariable("id") int id){
+    @GetMapping("movie/{id}")
+    public ResponseEntity<?>getMovieById(@PathVariable("id") String id){
         ResponseEntity responseEntity;
         try{
             responseEntity = new ResponseEntity<Optional<Movies>>(movieService.getMovieById(id),HttpStatus.OK);
@@ -68,8 +68,8 @@ public class MovieController {
         return responseEntity;
     }
 
-    @PutMapping("movie/update/{id}")
-    public ResponseEntity<?>updateMovie(@RequestBody Movies movies,@PathVariable("id") int id){
+    @PutMapping("movie/{id}")
+    public ResponseEntity<?>updateMovie(@RequestBody Movies movies,@PathVariable("id") String id){
         ResponseEntity responseEntity;
         try{
             movieService.update(movies,id);
@@ -82,14 +82,26 @@ public class MovieController {
     }
 
     //@PutMapping("movie/delete/{id}")
-    @DeleteMapping("movie/delete/{id}")
-    public  ResponseEntity<?> deleteMovie(@PathVariable("id") int id){
+    @DeleteMapping("movie/{id}")
+    public  ResponseEntity<?> deleteMovie(@PathVariable("id") String id){
         ResponseEntity responseEntity;
         try{
             responseEntity= new ResponseEntity<List<Movies>>(movieService.delete(id),HttpStatus.OK);
         }
         catch (NoSuchMovieException ex){
             responseEntity =new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+        }
+        return responseEntity;
+    }
+
+    @GetMapping("movie/name/{name}")
+    public ResponseEntity<?>getbyName(@PathVariable("name") String name){
+        ResponseEntity responseEntity;
+        try{
+            responseEntity = new ResponseEntity<List<Movies>>(movieService.getMovieByName(name),HttpStatus.OK);
+        }
+        catch (NoSuchMovieException ex){
+            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
         }
         return responseEntity;
     }

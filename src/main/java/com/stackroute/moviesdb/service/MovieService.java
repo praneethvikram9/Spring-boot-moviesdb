@@ -10,10 +10,19 @@ import java.util.Optional;
 
 public interface MovieService {
 
+    /*
     public Movies saveMovie(Movies movies) throws MovieNameExistsException;
     public List<Movies> getallMovies() throws NullDetailsException;
     public List<Movies> search(String moviename);
     public List<Movies> delete(int id) throws NoSuchMovieException;
     public List<Movies> update(Movies movies,int id) throws NoSuchMovieException;
-    public Optional<Movies> getMovieById(int id) throws NoSuchMovieException;
+    public Optional<Movies> getMovieById(int id) throws NoSuchMovieException;*/
+
+    public Movies saveMovie(Movies movies) throws MovieNameExistsException;
+    public List<Movies> getallMovies() throws NullDetailsException;
+    public Optional<Movies> getMovieById(String id) throws NoSuchMovieException;
+    public List<Movies> delete(String id) throws NoSuchMovieException;
+    public List<Movies> update(Movies movies,String id) throws NoSuchMovieException;
+    public List<Movies> getMovieByName(String title) throws NoSuchMovieException;
+
 }

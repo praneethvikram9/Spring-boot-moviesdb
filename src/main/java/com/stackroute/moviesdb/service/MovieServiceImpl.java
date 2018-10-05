@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movies saveMovie(Movies movies) throws MovieNameExistsException {
-        if(movieRepository.existsById(movies.getMovieId())){
+        if(movieRepository.existsById(movies.getImdbId())){
             throw new MovieNameExistsException("movie name already exist");
         }
         Movies savedMovie = movieRepository.save(movies);
@@ -44,14 +45,10 @@ public class MovieServiceImpl implements MovieService {
         return movieRepository.findAll();
     }
 
-    @Override
-    public List<Movies> search(String moviename) {
-        return null;
-    }
 
 
     @Override
-    public List<Movies> delete(int id) throws NoSuchMovieException {
+    public List<Movies> delete(String id) throws NoSuchMovieException {
         if(!movieRepository.existsById(id)){
             throw new  NoSuchMovieException("no movie with that id");
         }
@@ -60,14 +57,10 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movies> update(Movies movies,int id)throws NoSuchMovieException {
+    public List<Movies> update(Movies movies,String id)throws NoSuchMovieException {
 
          if(movieRepository.existsById(id)){
-             movieRepository.getOne(id).setCast(movies.getCast());
-             movieRepository.getOne(id).setCrew(movies.getCrew());
-             movieRepository.getOne(id).setSimilarMovies(movies.getSimilarMovies());
-             movieRepository.getOne(id).setRatings(movies.getRatings());
-             movieRepository.getOne(id).setTitle(movies.getTitle());
+             movieRepository.getOne(id).setComments(movies.getComments());
          }
          else
          {
@@ -77,7 +70,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Optional<Movies> getMovieById(int id) throws NoSuchMovieException{
+    public Optional<Movies> getMovieById(String id) throws NoSuchMovieException{
 
         if(movieRepository.existsById(id)){
 
@@ -88,6 +81,18 @@ public class MovieServiceImpl implements MovieService {
             throw new NoSuchMovieException("there is no movie by that id");
         }
 
+    }
+
+    @Override
+    public List<Movies>getMovieByName(String name) throws NoSuchMovieException{
+        List<Movies> temp = movieRepository.findAll();
+        List<Movies> result = new ArrayList<>();
+        for(Movies t:temp){
+            if(t.getMovieTitle().equals(name)){
+                result.add(t);
+            }
+        }
+        return result;
     }
 
 }
