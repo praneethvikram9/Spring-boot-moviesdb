@@ -6,6 +6,8 @@ import com.stackroute.moviesdb.exceptions.NoSuchMovieException;
 import com.stackroute.moviesdb.exceptions.NullDetailsException;
 import com.stackroute.moviesdb.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,7 +16,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Primary
 @Transactional
+@Qualifier("1")
 public class MovieServiceImpl implements MovieService {
 
 
@@ -24,6 +28,8 @@ public class MovieServiceImpl implements MovieService {
     public MovieServiceImpl(MovieRepository movieRepository1){
         this.movieRepository=movieRepository1;
     }
+
+
 
 
 
@@ -39,10 +45,12 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movies> getallMovies() throws NullDetailsException {
+
         if(movieRepository==null){
             throw new NullDetailsException("no details to show");
         }
-        return movieRepository.findAll();
+        List<Movies> movies = movieRepository.findAll();
+        return movies;
     }
 
 
@@ -52,7 +60,8 @@ public class MovieServiceImpl implements MovieService {
         if(!movieRepository.existsById(id)){
             throw new  NoSuchMovieException("no movie with that id");
         }
-        movieRepository.deleteById(id);
+
+         movieRepository.deleteById(id);
         return movieRepository.findAll();
     }
 
@@ -60,7 +69,7 @@ public class MovieServiceImpl implements MovieService {
     public List<Movies> update(Movies movies,String id)throws NoSuchMovieException {
 
          if(movieRepository.existsById(id)){
-             movieRepository.getOne(id).setComments(movies.getComments());
+             movieRepository.findById(id).get().setComments(movies.getComments());
          }
          else
          {

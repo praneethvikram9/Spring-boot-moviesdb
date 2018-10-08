@@ -6,6 +6,8 @@ import com.stackroute.moviesdb.exceptions.NoSuchMovieException;
 import com.stackroute.moviesdb.exceptions.NullDetailsException;
 import com.stackroute.moviesdb.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +24,7 @@ public class MovieController {
     MovieService movieService ;
 
     @Autowired
-    public MovieController(MovieService movieService1){
+    public MovieController(@Qualifier("1") MovieService movieService1){
         this.movieService=movieService1;
     }
 
@@ -45,6 +47,7 @@ public class MovieController {
     }
 
     @GetMapping("movie/show")
+
     public ResponseEntity<?> getallMovies(){
         ResponseEntity responseEntity ;
         try{
@@ -55,7 +58,6 @@ public class MovieController {
         }
         return responseEntity;
     }
-
     @GetMapping("movie/{id}")
     public ResponseEntity<?>getMovieById(@PathVariable("id") String id){
         ResponseEntity responseEntity;

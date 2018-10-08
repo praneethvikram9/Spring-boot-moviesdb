@@ -6,21 +6,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.List;
 
-@Entity
-@Table(name = "Movies")
 public class Movies {
     @Id
-    @Column(name = "imdbId",nullable = false)
+    //@Column(name = "imdbId",nullable = false)
     private String imdbId;
-    @Column(name = "movieTitle",nullable = false)
+    //@Column(name = "movieTitle",nullable = false)
     private String movieTitle;
-    @Column(name = "postedUrl",nullable = false)
+    //@Column(name = "postedUrl",nullable = false)
     private String postedUrl;
-    @Column(name = "rating",nullable = false)
+    //@Column(name = "rating",nullable = false)
     private float rating;
-    @Column(name = "yearOfRelease",nullable = false)
+    //@Column(name = "yearOfRelease",nullable = false)
     private String yearOfRelease;
-    @Column(name = "comments",nullable = false)
+    //@Column(name = "comments",nullable = false)
     private String comments;
 
     public String getImdbId() {
