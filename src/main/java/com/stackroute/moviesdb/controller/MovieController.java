@@ -35,10 +35,10 @@ public class MovieController {
         try
         {
             movieService.saveMovie(movies);
-            responseEntity = new ResponseEntity<String>("successful created", HttpStatus.OK);
+            responseEntity = new ResponseEntity<String>("successful created", HttpStatus.CREATED);
         }
         catch (Exception ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_IMPLEMENTED);
 
         }
 
@@ -51,10 +51,10 @@ public class MovieController {
     public ResponseEntity<?> getallMovies(){
         ResponseEntity responseEntity ;
         try{
-            responseEntity = new ResponseEntity<List<Movies>>(movieService.getallMovies(),HttpStatus.OK);
+            responseEntity = new ResponseEntity<List<Movies>>(movieService.getallMovies(),HttpStatus.FOUND);
         }
         catch (NullDetailsException ex){
-            responseEntity =new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity =new ResponseEntity<String>(ex.getMessage(),HttpStatus.NO_CONTENT);
         }
         return responseEntity;
     }
@@ -62,10 +62,10 @@ public class MovieController {
     public ResponseEntity<?>getMovieById(@PathVariable("id") String id){
         ResponseEntity responseEntity;
         try{
-            responseEntity = new ResponseEntity<Optional<Movies>>(movieService.getMovieById(id),HttpStatus.OK);
+            responseEntity = new ResponseEntity<Optional<Movies>>(movieService.getMovieById(id),HttpStatus.FOUND);
         }
         catch (NoSuchMovieException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.NO_CONTENT);
         }
         return responseEntity;
     }
@@ -75,10 +75,10 @@ public class MovieController {
         ResponseEntity responseEntity;
         try{
             movieService.update(movies,id);
-            responseEntity = new ResponseEntity<String>("successfully updated",HttpStatus.OK);
+            responseEntity = new ResponseEntity<String>("successfully updated",HttpStatus.ACCEPTED);
         }
         catch (NoSuchMovieException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_IMPLEMENTED);
         }
         return responseEntity;
     }
@@ -91,7 +91,7 @@ public class MovieController {
             responseEntity= new ResponseEntity<List<Movies>>(movieService.delete(id),HttpStatus.OK);
         }
         catch (NoSuchMovieException ex){
-            responseEntity =new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity =new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
         return responseEntity;
     }
@@ -100,10 +100,10 @@ public class MovieController {
     public ResponseEntity<?>getbyName(@PathVariable("name") String name){
         ResponseEntity responseEntity;
         try{
-            responseEntity = new ResponseEntity<List<Movies>>(movieService.getMovieByName(name),HttpStatus.OK);
+            responseEntity = new ResponseEntity<List<Movies>>(movieService.getMovieByName(name),HttpStatus.FOUND);
         }
         catch (NoSuchMovieException ex){
-            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.CONFLICT);
+            responseEntity = new ResponseEntity<String>(ex.getMessage(),HttpStatus.NOT_FOUND);
         }
         return responseEntity;
     }

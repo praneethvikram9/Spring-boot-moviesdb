@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MovieRepository extends MongoRepository<Movies,String> {
+public interface MovieRepository extends JpaRepository<Movies,String> {
 
   //  @Query(value = "select * from movies",nativeQuery = true)
    // List<Movies> getallMovies();
