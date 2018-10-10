@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Primary
-@Transactional
+//@Transactional
 @Qualifier("1")
 public class MovieServiceImpl implements MovieService {
 
@@ -69,7 +69,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movies> update(Movies movies,String id)throws NoSuchMovieException {
 
          if(movieRepository.existsById(id)){
-             movieRepository.findById(id).get().setComments(movies.getComments());
+             Movies temp=movieRepository.findById(id).get();
+             temp.setComments(movies.getComments());
+             movieRepository.save(temp);
          }
          else
          {

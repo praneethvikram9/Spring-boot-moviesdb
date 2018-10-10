@@ -1,24 +1,22 @@
 package com.stackroute.moviesdb.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.Id;
+//import javax.persistence.Table;
 import java.util.List;
-@Entity
+
+//@Document(collection = "movies")
 public class Movies {
     @Id
-    @Column(name = "imdbId",nullable = false)
     private String imdbId;
-    @Column(name = "movieTitle",nullable = false)
     private String movieTitle;
-    @Column(name = "postedUrl",nullable = false)
     private String postedUrl;
-    @Column(name = "rating",nullable = false)
     private float rating;
-    @Column(name = "yearOfRelease",nullable = false)
     private String yearOfRelease;
-    @Column(name = "comments",nullable = false)
     private String comments;
 
     public String getImdbId() {

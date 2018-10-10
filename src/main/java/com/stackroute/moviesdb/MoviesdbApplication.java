@@ -29,8 +29,6 @@ public class MoviesdbApplication implements ApplicationListener<ContextRefreshed
 
     @Override
     public void run(String... args) throws Exception {
-        movieRepository.save(new Movies("tt245","master","www.memastesr.com", (float) 4.9,"2016","-----"));
-        movieRepository.save(new Movies("w1234","qaswerrt","www.mqwert.com",(float) 3.7,"2017","========"));
 
 
     }
